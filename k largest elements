@@ -1,0 +1,31 @@
+class Solution {
+    class Large_Element implements Comparable<Large_Element> {
+        public int data;
+        public Large_Element(int data){
+            this.data=data;
+        }
+        public int compareTo(Large_Element e2){
+            return e2.data-this.data;
+        }
+    }
+    int[] kLargest(int[] arr, int n, int k) {
+        // code here
+        PriorityQueue<Large_Element> pq = new PriorityQueue<>();
+        int i=0,j=0;
+        int large[]= new int[k];
+        // inserting the elements into the priority Queue which will arrange the elemnts in descending order
+        while(i<n){
+            pq.add(new Large_Element(arr[i]));
+            i++;
+        }
+        
+        
+        while(j<k){
+            Large_Element e = pq.remove();
+            large[j]= e.data;
+            j++;
+        }
+        return large;
+    }
+}
+
