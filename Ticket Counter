@@ -1,0 +1,39 @@
+class Solution {
+    public static int distributeTicket(int N,int K)
+    {
+        int personCounter=0;
+        int lastPerson=0;
+        int initialStartingPerson=0;
+        int lastPersonFromThelast=N;
+        boolean isBeginDone=false;
+        int difference=0;
+        
+        while(personCounter<=N)
+        {
+            difference = N-personCounter > K ? K : N-personCounter;
+            if(!isBeginDone)
+            {
+                initialStartingPerson+=difference;
+                personCounter+=difference;
+                if(personCounter==N)
+                {
+                    lastPerson = initialStartingPerson;
+                    break;
+                }
+                isBeginDone=true;
+            }
+            else
+            {
+                lastPersonFromThelast-=difference;
+                personCounter+=difference;
+                if(personCounter==N)
+                {
+                    lastPerson = lastPersonFromThelast+1;
+                    break;
+                }
+                isBeginDone=false;
+            }
+        }
+        return lastPerson;
+    }
+}
