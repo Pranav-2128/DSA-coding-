@@ -1,0 +1,61 @@
+import java.util.Scanner;
+
+public class Quest1 
+{
+    static int checkZero(String s)
+    {
+        int count=0;
+        for (int i = 0; i < s.length(); i++) 
+        {
+            if (s.charAt(i)=='0')
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+    static int checkOne(String s)
+    {
+        int count=0;
+        for (int i = 0; i < s.length(); i++) 
+        {
+            if (s.charAt(i)=='1')
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+    static void isPossible(String s1, String s2)
+    {
+        if (s1.length()==s2.length())
+        {
+            int firstzeroes=checkZero(s1);
+            int firstones=checkOne(s1);
+            int secondzeroes=checkZero(s2);
+            int secondones=checkOne(s2);
+
+            if (firstzeroes==secondzeroes && firstones==secondones)
+            {
+                System.out.println("Possible");
+            }
+            else 
+            {
+                System.out.println("Not Possible");
+            }
+        }
+        else 
+        {
+            System.out.println("Impossible(Different_Length)");
+        }
+    }
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string 1: ");  
+        String s1 = sc.nextLine();
+        System.out.print("Enter a string 2: ");  
+        String s2 = sc.nextLine();
+        isPossible(s1,s2);
+    }
+}
