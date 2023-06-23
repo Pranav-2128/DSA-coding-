@@ -1,0 +1,18 @@
+str1 = str(input("Enter the string: "))
+i = int(input("Enter the no. of rotations: "))
+dirx = str(input("Enter the dirxn to rotate(R/L): "))
+
+def leftrotate(s, d):
+	tmp = s[d : ] + s[0 : d]
+	return tmp
+
+def rightrotate(s, d):
+
+    return leftrotate(s, len(s) - d)
+
+if __name__=="__main__":
+    
+    if(dirx == "L" or dirx == "l"):
+    	print("Output: " + leftrotate(str1, i))
+    elif(dirx == "R" or dirx == "r"):
+    	print("Output: " + rightrotate(str1, i))
