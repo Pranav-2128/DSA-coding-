@@ -1,0 +1,85 @@
+import java.util.*;
+
+class Node {
+    int row;
+    int col;
+    String key;
+
+    Node(int row, int col, String key) {
+        this.row = row;
+        this.col = col;
+        this.key = key;
+    }
+}
+
+class Solution {
+    public int shortestPathAllKeys(String[] grid) {
+        int n = grid.length;
+        int m = grid[0].length();
+
+        int[] x_dirs = {0, 0, 1, -1};
+        int[] y_dirs = {1, -1, 0, 0};
+        Set<String> visited = new HashSet<>();
+
+        int steps = 0;
+        Queue<Node> queue = new LinkedList<>();
+        int count = 0;
+
+        char[][] matrix = new char[n][m];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                matrix[i][j] = grid[i].charAt(j);
+                if (matrix[i][j] == '@') {
+                    queue.add(new Node(i, j, ""));
+                } else if (matrix[i][j] >= 'a' && matrix[i][j] <= 'f') {
+                    count++;
+                }
+            }
+        }
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int ind = 0; ind < size; ind++) {
+                Node node = queue.poll();
+                int row = node.row;
+                int col = node.col;
+                String key = node.key;
+
+                if (!visited.contains(toString(row, col, key))) {
+                    visited.add(toString(row, col, key));
+                } else {
+                    continue;
+                }
+
+                if (key.length() == count) {
+                    return steps;
+                }
+
+                for (int i = 0; i < 4; i++) {
+                    int nrow = x_dirs[i] + row;
+                    int ncol = y_dirs[i] + col;
+                    Node newNode = new Node(nrow, ncol, key);
+                    if (nrow < 0 || nrow >= n || ncol < 0 || ncol >= m || matrix[nrow][ncol] == '#' || visited.contains(toString(nrow, ncol, key))) {
+                        continue;
+                    }
+                    char ch = matrix[nrow][ncol];
+                    if (key.indexOf(ch) == -1 && ch >= 'a' && ch <= 'f') {
+                        queue.add(new Node(nrow, ncol, key + ch));
+                    } else if (ch >= 'A' && ch <= 'F' && key.indexOf(Character.toLowerCase(ch)) == -1) {
+                        continue;
+                    } else {
+                        queue.add(new Node(nrow, ncol, key));
+                    }
+                }
+            }
+            steps++;
+        }
+        return -1;
+    }
+
+    public String toString(int row, int col, String key) {
+        return row + "-" + col + "-" + key;
+    }
+
+}
