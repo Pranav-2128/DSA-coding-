@@ -1,0 +1,35 @@
+import java.util.*;
+
+public class Palindrome 
+{
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = sc.nextInt();
+
+        String binary = Integer.toBinaryString(number);
+        boolean Pal = Pal(binary);
+        System.out.println("Binary of number: " + binary);
+        if (Pal) 
+        {
+            System.out.println("The binary of " + number + " is a palindrome.");
+        } else 
+        {
+            System.out.println("The binary of " + number + " is not a palindrome.");
+        }
+    }
+
+    public static boolean Pal(String binary) 
+    {
+        int length = binary.length();
+        for (int i = 0; i < length / 2; i++) 
+        {
+            if (binary.charAt(i) != binary.charAt(length - i - 1)) 
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+}
