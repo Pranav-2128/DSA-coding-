@@ -1,0 +1,33 @@
+class Solution {
+    public boolean findTriplets(int[] arr, int n)
+    {
+        Arrays.sort(arr);
+        int sum = 0;
+        boolean flag = false;
+        int left = 0;
+        int right = arr.length - 1;
+        for (int i = 0; i < n; i++)
+        {
+            left = i + 1;
+            right = n - 1;
+            while(left < right)
+            {
+                sum = arr[i] + arr[left] + arr[right];
+                if (sum == 0) 
+                {
+                    flag = true;
+                    return flag;
+                }
+                else if (sum > 0)
+                {
+                    right--;
+                }
+                else if(sum < 0)
+                {
+                    left++;
+                }
+            }
+        }
+        return flag;
+    }
+}
