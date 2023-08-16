@@ -1,0 +1,40 @@
+import java.io.*;
+import java.util.*;
+
+class GFG 
+{
+    public static void main(String[] args) throws IOException 
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t;
+        t = Integer.parseInt(br.readLine());
+        while(t-- > 0)
+        {    
+            int n;
+            n = Integer.parseInt(br.readLine());   
+            Solution obj = new Solution();
+            int res = obj.findCatalan(n);
+            System.out.println(res);
+        }
+    }
+}
+
+class Solution 
+{
+    public static int findCatalan(int n) 
+    {
+        long dp[] = new long[n+1];
+        dp[0] = dp[1] = 1L;
+        long mod = 1000_000_007L;
+        for(int j = 2; j <= n; j++)
+        {
+            long ans = 0;
+            for (int i = 1; i <= j; i++) 
+            {
+                ans = (ans + (dp[i-1]*dp[j-i])%mod)%mod;
+            }
+            dp[j] = ans;
+        }
+        return (int)(dp[n]%mod);
+    }
+}
