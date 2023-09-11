@@ -1,0 +1,39 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+class Driver
+{
+    public static void main(String args[])throws IOException
+    {
+        BufferedReader reader =new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(reader.readLine());
+        
+        while(t-- > 0)
+        {
+            int n = Integer.parseInt(reader.readLine());
+            Solution s = new Solution();
+            System.out.println(s.isLucky(n)? "1" : "0");
+        }
+    }
+}
+class Solution
+{
+    public static boolean isLucky(int n)
+    {
+        int count = 2;
+        while(true)
+        {
+            if(n % count == 0)
+            {
+                return false;
+            }
+            if(count > n)
+            {
+                return true;
+            }
+            n = (n - (n/count));
+            count++;
+        }
+    }
+}
