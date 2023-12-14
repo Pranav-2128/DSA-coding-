@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+
+class Solution
+{
+    long countWays(int n, int k)
+    {
+        if(n == 1)
+            return k;
+            
+        long mod = (long) 1e9 + 7, same = 0, diff = k;
+        
+        for(int i = 2; i <= n; i++) 
+        {
+            long prev = same;
+            same = diff;
+            diff = ((prev + same) * (k - 1)) % mod;
+        }
+        
+        return (same + diff) % mod;
+    }
+}
+
+class Array 
+{
+    public static void main (String[] args) throws IOException
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int testcases = Integer.parseInt(br.readLine());
+        while(testcases-- > 0)
+        {
+            String line = br.readLine();
+            String[] a2 = line.trim().split("\\s+");
+            int n =Integer.parseInt(a2[0]);
+            int k =Integer.parseInt(a2[1]);
+
+            Solution ob = new Solution();
+            long ans = ob.countWays(n,k);
+            System.out.println(ans);
+        }
+    }
+}
