@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.*; 
+
+class GFG
+{
+    public static void main(String args[]) throws IOException 
+    { 
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
+        int t = Integer.parseInt(br.readLine().trim()); 
+
+        while(t > 0)
+        {
+        	long n = Integer.parseInt(br.readLine().trim()); 
+            Solution ob = new Solution();
+            System.out.println(ob.countStr(n)); 
+            t--;
+        }
+    } 
+} 
+class Solution 
+{ 
+    static long countStr(long n)
+    {
+        long all_a_s = 1;
+        long one_b_rest_a = n;
+        long one_c_rest_a = n;
+        long one_b_one_c_rest_a = n*(n-1);
+        long two_c_rest_a = n*(n-1)/2;
+        long two_c_one_b_rest_a = n*(n-1)*(n-2)/2;
+        return all_a_s + one_b_rest_a + one_c_rest_a + one_b_one_c_rest_a + two_c_rest_a + two_c_one_b_rest_a;
+    }
+}
