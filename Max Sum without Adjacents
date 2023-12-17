@@ -1,0 +1,51 @@
+import java.util.*;
+import java.io.*;
+
+public class Main
+{
+    public static void main(String[] args) throws Exception 
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int tc = Integer.parseInt(br.readLine().trim());
+        while (tc-- > 0) 
+        {
+            String[] inputLine;
+            int n = Integer.parseInt(br.readLine().trim());
+            int[] arr = new int[n];
+            inputLine = br.readLine().trim().split(" ");
+            for (int i = 0; i < n; i++) 
+            {
+                arr[i] = Integer.parseInt(inputLine[i]);
+            }
+            int ans = new Solution().findMaxSum(arr, n);
+            System.out.println(ans);
+        }
+    }
+}
+
+class Solution 
+{
+    public int helper(int arr[],int n,int i,int dp[])
+    {
+        if(i >= n) 
+        {
+            return 0;
+        }
+        
+        if(dp[i] != 0)
+        {
+            return dp[i]; 
+        }
+        
+        int take = arr[i] + helper(arr,n,i+2,dp);
+        int not_take = helper(arr, n, i+1, dp);
+        dp[i]= Math.max(take,not_take);
+        return dp[i];
+    }
+    
+    int findMaxSum(int arr[], int n) 
+    {
+        int dp[] = new int[n+1];
+        return helper(arr, n, 0, dp);
+    }
+}
