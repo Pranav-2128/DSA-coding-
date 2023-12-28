@@ -1,0 +1,58 @@
+import java.io.*;
+import java.util.*;
+
+class GFG
+{
+    public static void main(String args[])throws IOException
+    {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(in.readLine());
+        while(t-- > 0)
+        {
+            String wild = in.readLine();
+            String pattern = in.readLine();
+            
+            Solution ob = new Solution();
+            boolean flag = ob.match(wild, pattern);
+            if(flag)
+            {
+                System.out.println("Yes");
+            }
+            else
+            {
+                System.out.println("No");
+            }
+        }
+    }
+}
+
+class Solution
+{
+    static boolean match(String w, String p)
+    {
+        int i=0;
+        for( ; i<w.length() && i<p.length();i++) 
+        {
+            if (w.charAt(i) == '?') 
+            {
+                continue;
+            }
+        
+            else if (w.charAt(i) == '*') 
+            {
+                for(int j = i; j <= p.length(); j++) 
+                {
+                    if (match(w.substring(i+1), p.substring(j)))
+                    {
+                        return true;
+                    }
+                }
+            } 
+            else if(w.charAt(i) != p.charAt(i)) 
+            {
+                return false;
+            }
+        }
+        return w.length() == p.length();
+    }
+}
