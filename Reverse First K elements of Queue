@@ -1,0 +1,61 @@
+import java.util.*;
+class ModifyQueue 
+{
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+
+        int t = sc.nextInt();
+
+        while (t-- > 0) 
+        {
+            int n = sc.nextInt();
+            int k = sc.nextInt();
+            Queue<Integer> q = new LinkedList<>();
+
+            while (n-- > 0) 
+            {
+                q.add((int)sc.nextInt());
+            }
+
+            GfG g = new GfG();
+            Queue<Integer> ans = g.modifyQueue(q, k);
+
+            while (!ans.isEmpty()) 
+            {
+                int a = ans.peek();
+                ans.poll();
+                System.out.print(a + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+class GfG 
+{
+     public Queue<Integer> modifyQueue(Queue<Integer> q, int k) 
+     {
+        int n = q.size() - k;
+        
+        Stack<Integer> s = new Stack<>();
+        while(k > 0 && !q.isEmpty())
+        {
+            s.push(q.remove());
+            k--;
+        }
+        
+        while(!s.isEmpty())
+        {
+            q.add(s.pop());
+        }
+        
+        while(n>0)
+        {
+            q.add(q.remove());
+            n--;
+        }
+        
+        return q;
+    }
+}
