@@ -1,0 +1,36 @@
+import java.lang.*;
+import java.io.*;
+import java.util.*;
+
+class Solution
+
+{
+    public static boolean checkPangram (String str) 
+    {
+        str = str.replaceAll("\\s", "").toLowerCase();
+        HashSet<Character> hs = new HashSet<>();
+        for (char c : str.toCharArray()) 
+        {
+            if (Character.isLetter(c)) 
+            {
+                hs.add(c);
+            }
+        }
+        return hs.size() == 26;
+    }
+
+}
+
+class GFG
+{
+	public static void main (String[] args) throws IOException
+	{
+	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	    int t = Integer.parseInt(br.readLine());
+	    while(t-->0)
+	    {
+	        String s = br.readLine().trim();
+	        System.out.println(new Solution().checkPangram (s)==true?1:0);
+    	}
+    }
+}
