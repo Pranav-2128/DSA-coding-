@@ -1,0 +1,78 @@
+import java.util.*;
+
+class Check_IsToepliz 
+{
+    public static void main(String args[]) 
+    {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while (T > 0) 
+        {
+            int N = sc.nextInt();
+            int M = sc.nextInt();
+            int arr[][] = new int[N][M];
+            for (int i = 0; i < N; i++) 
+            {
+                for (int j = 0; j < M; j++) arr[i][j] = sc.nextInt();
+            }
+            Solution g = new Solution();
+            boolean b = g.isToeplitz(arr);
+
+            if (b == true)
+                System.out.println("true");
+            else
+                System.out.println("false");
+
+            T--;
+        }
+    }
+}
+
+class Solution 
+{
+    boolean checkFirst(int row , int col , int[][]mat)
+    {
+        while(row < mat.length-1 && col < mat[0].length-1)
+        {
+            int nextRow = row+1;
+            int nextCol = col+1;
+            if(mat[nextRow][nextCol] != mat[row][col])
+            {
+                return false;
+            }
+            row++;
+            col++;
+        }
+        return true;
+    }
+    boolean checkLast(int row  , int col , int[][]mat)
+    {
+        while(row > 0 && col > 0)
+        {
+            int prevRow = row-1;
+            int prevCol = col-1;
+            if(mat[prevRow][prevCol] != mat[row][col])
+            {
+                return false;
+            }
+            row--;
+            col--;
+        }
+        return true;
+    }
+    boolean isToeplitz(int mat[][]) 
+    {
+        for(int j = 0; j < mat[0].length;j++)
+        {
+            if(checkFirst(0 , j , mat) == false)
+            {
+                return false;
+            }
+            if(checkLast(mat.length-1 , j , mat) == false)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+}
