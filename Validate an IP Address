@@ -1,0 +1,49 @@
+import java.io.*;
+import java.util.*;
+
+public class validip {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+
+        while (t-- > 0) {
+            String s = sc.next();
+            Solution obj = new Solution();
+
+            if (obj.isValid(s))
+                System.out.println("true");
+            else
+                System.out.println("false");
+        }
+    }
+}
+class Solution 
+{
+    public boolean isValid(String str) 
+    {
+        int dot = 0;
+        for(int i = 0; i < str.length(); i++)
+        { 
+        char ch = str.charAt(i);
+        if(ch=='.') return false; 
+         String num="";
+            while(ch != '.'&& i < str.length())
+            {   
+                num += ch;
+                i++;
+                if(i<str.length())
+                ch=str.charAt(i);
+            }
+            dot++;
+            if(num.charAt(0)=='0'&&num.length()>1)return false; 
+            int n=Integer.parseInt(num);
+            if(n<0||n>255)
+            {
+               return false; 
+            }
+        }
+        return dot==4;
+    }
+}
